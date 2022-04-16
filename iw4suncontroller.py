@@ -10,7 +10,7 @@ import webbrowser
 # gui setup stuff
 root = Tk()
 root.title("IW4x Sun Controller")
-root.geometry('300x115')
+root.geometry('311x115')
 root.resizable(False, False)
 
 tab_control = ttk.Notebook(root)
@@ -63,6 +63,12 @@ link = Label(tab3, text="Github Page", fg="blue", cursor="hand2")
 link.grid(column=0, row=1)
 link.bind("<Button-1>", lambda e: callback("https://github.com/kruumy/iw4x-sun-controller"))
 
+def brightDisplay():
+    brightness = pm.read_float(sunRedAdd) + pm.read_float(sunGreenAdd) + pm.read_float(sunBlueAdd)
+    brightnessPercent = "{:.1%}".format(brightness / 3)
+    brightLabel = Label(tab1, text="Brightness: " + str(brightnessPercent))
+    brightLabel.grid(column=3, row=1)
+
 # Slider Color Red
 
 current_value_red = DoubleVar()
@@ -75,6 +81,7 @@ def get_current_value_red():
 
 def slider_changed_red(event):
     wrpFloat(sunRedAdd, event)
+    brightDisplay()
     value_label_red.configure(text=get_current_value_red())
 
 
@@ -122,6 +129,7 @@ def get_current_value_blue():
 
 def slider_changed_blue(event):
     wrpFloat(sunBlueAdd, event)
+    brightDisplay()
     value_label_blue.configure(text=get_current_value_blue())
 
 
@@ -169,6 +177,7 @@ def get_current_value_green():
 
 def slider_changed_green(event):
     wrpFloat(sunGreenAdd, event)
+    brightDisplay()
     value_label_green.configure(text=get_current_value_green())
 
 
