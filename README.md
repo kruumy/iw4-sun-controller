@@ -40,7 +40,7 @@
 
 ## Credits
 
-- Gmzorz for finding the addresses.
+- [Gmzorz](https://youtu.be/GBZYLdMKc3s) for finding the addresses.
 - Undo for making the logo/icon.
 
 ---
