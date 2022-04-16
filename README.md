@@ -26,6 +26,12 @@
 3. Open iw4suncontroller.exe
 4. Done!
 
+<div align="left">
+  <a href="https://github.com/kruumy/iw4-sun-constoller">
+    <img src="preview2.png" alt="Preivew" width="300" height="100">
+  </a>
+</div>
+
 ## Todo
 
 * Add an option to upload presets and make presets.
