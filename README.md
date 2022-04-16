@@ -38,7 +38,7 @@
 * Add an option to upload presets and make presets.
 * See if it works on stock mw2 and add support (who even uses that tho)
 
-## Credits
+## Credit
 
 - [Gmzorz](https://youtu.be/GBZYLdMKc3s) for finding the addresses.
 - [Undo](https://www.youtube.com/UndoVFX) for making the logo/icon.
