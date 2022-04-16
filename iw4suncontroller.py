@@ -57,7 +57,7 @@ def callback(url):
     webbrowser.open_new(url)
 
 
-lbl1 = Label(tab3, text="v1.00")
+lbl1 = Label(tab3, text="v1.01")
 lbl1.grid(column=0, row=0)
 link = Label(tab3, text="Github Page", fg="blue", cursor="hand2")
 link.grid(column=0, row=1)
