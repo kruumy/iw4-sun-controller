@@ -11,14 +11,6 @@
   </a>
 </div>
 
-## Support
-
-| Name | Status |
-| --- | --- |
-| IW4x | Yes |
-| IW4m | Yes |
-| Mw2 | ? |
-
 ## Installation
 
 1. Download the latest version from **releases**. -->
@@ -31,6 +23,15 @@
     <img src="preview2.png" alt="Preivew" width="300" height="100">
   </a>
 </div>
+
+## Support
+
+| Name | Status |
+| --- | --- |
+| IW4x | Yes |
+| IW4m | Yes |
+| Mw2 | ? |
+
 
 ## Todo
 
