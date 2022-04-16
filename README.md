@@ -42,7 +42,7 @@
 
 * Add an option to upload presets and make presets.
 * See if it works on stock mw2 and add support (who even uses that tho)
-* Fix whatever makes the color tab use so much cpu.
+* Add brightness calculator to main release(uses a lot of CPU usage currently)
 
 ## Credit
 
