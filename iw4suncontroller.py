@@ -1,6 +1,8 @@
+import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import filedialog
 from pymem import Pymem
 import win32api
 import pywintypes
@@ -17,9 +19,13 @@ tab_control = ttk.Notebook(root)
 tab1 = ttk.Frame(tab_control)
 tab2 = ttk.Frame(tab_control)
 tab3 = ttk.Frame(tab_control)
+tab4 = ttk.Frame(tab_control)
+tab5 = ttk.Frame(tab_control)
 tab_control.add(tab1, text='Color')
 tab_control.add(tab2, text='Position')
-tab_control.add(tab3, text='About')
+tab_control.add(tab3, text='Presets')
+tab_control.add(tab4, text='Misc')
+tab_control.add(tab5, text='About')
 tab_control.pack(expand=1, fill='both')
 try:
     root.iconbitmap("icon.ico")
@@ -34,21 +40,32 @@ except:
         pm = Pymem("iw4x.exe")
     except:
         print("Could Not Find iw4m.exe")
-        messagebox.showerror('Error', 'Could Not Find iw4m.exe or iw4x.exe\nPlease make sure it is running and in game/demo.')
+        messagebox.showerror('Error',
+                             'Could Not Find iw4m.exe or iw4x.exe\nPlease make sure it is running and in game/demo.')
         sys.exit()
 
+# setting addresses
 sunRedAdd = 0x0085B878
 sunGreenAdd = 0x0085B87C
 sunBlueAdd = 0x0085B880
 sunXAdd = 0x0085B884
 sunYAdd = 0x0085B888
 sunZAdd = 0x0085B88C
+fovAdd = 0x63FC560
+
+# setting defaults
+dred = pm.read_float(sunRedAdd)
+dgreen = pm.read_float(sunGreenAdd)
+dblue = pm.read_float(sunBlueAdd)
+dx = pm.read_float(sunXAdd)
+dy = pm.read_float(sunYAdd)
+dz = pm.read_float(sunZAdd)
 
 
 def wrpFloat(address, value):
     pm.write_float(address, float(value))
-    a = pm.read_float(address)
-    print("Value: " + str(a))
+    # a = pm.read_float(address)
+    # print("Value: " + str(a))
 
 
 # gui stuff cont
@@ -57,17 +74,77 @@ def callback(url):
     webbrowser.open_new(url)
 
 
-lbl1 = Label(tab3, text="v1.01")
+lbl1 = Label(tab5, text="v2.00")
 lbl1.grid(column=0, row=0)
-link = Label(tab3, text="Github Page", fg="blue", cursor="hand2")
+link = Label(tab5, text="Github Page", fg="blue", cursor="hand2")
 link.grid(column=0, row=1)
-link.bind("<Button-1>", lambda e: callback("https://github.com/kruumy/iw4x-sun-controller"))
+link.bind("<Button-1>", lambda e: callback("https://github.com/kruumy/iw4-sun-controller"))
+
 
 def brightDisplay():
-    brightness = pm.read_float(sunRedAdd) + pm.read_float(sunGreenAdd) + pm.read_float(sunBlueAdd)
-    brightnessPercent = "{:.1%}".format(brightness / 3)
-    brightLabel = Label(tab1, text="Brightness: " + str(brightnessPercent))
-    brightLabel.grid(column=3, row=1)
+    pass
+    # brightness = pm.read_float(sunRedAdd) + pm.read_float(sunGreenAdd) + pm.read_float(sunBlueAdd)
+    # brightnessPercent = "{:.1%}".format(brightness / 3)
+    # brightLabel = Label(tab1, text="Brightness: " + str(brightnessPercent))
+    # brightLabel.grid(column=4, row=1)
+
+
+# open current action
+
+def openAction():
+    action = pm.read_string(0x01ABF8A0)
+    messagebox.showinfo('Current Action', action)
+
+
+btn1 = Button(tab4, text='Current Action', command=openAction)
+btn1.grid(column=0, row=1)
+
+# Slider FOV
+
+current_value_fov = DoubleVar()
+
+
+def get_current_value_fov():
+    current_value_fov.set(pm.read_float(fovAdd))
+    return '{: .2f}'.format(current_value_fov.get())
+
+
+def slider_changed_fov(event):
+    wrpFloat(fovAdd, event)
+    value_label_fov.configure(text=get_current_value_fov())
+
+
+slider_label_fov = ttk.Label(
+    tab4,
+    text='FOV:'
+)
+slider_label_fov.grid(
+    column=0,
+    row=0,
+    sticky='w'
+)
+slider_fov = ttk.Scale(
+    tab4,
+    from_=0,
+    to=180,
+    orient='horizontal',
+    command=slider_changed_fov,
+    variable=current_value_fov
+)
+slider_fov.grid(
+    column=1,
+    row=0,
+    sticky='we'
+)
+value_label_fov = ttk.Label(
+    tab4,
+    text=get_current_value_fov()
+)
+value_label_fov.grid(
+    column=2,
+    row=0,
+    sticky='n'
+)
 
 # Slider Color Red
 
@@ -400,5 +477,45 @@ value_label_z.grid(
     row=2,
     sticky='n'
 )
+
+
+# preset stuff
+def setPreset(red, green, blue, x, y, z):
+    slider_changed_red(float(red))
+    slider_changed_green(float(green))
+    slider_changed_blue(float(blue))
+    slider_changed_x(float(x))
+    slider_changed_y(float(y))
+    slider_changed_z(float(z))
+    messagebox.showinfo('Notification', 'Preset Applied')
+
+
+def setDefaults():
+    slider_changed_red(float(dred))
+    slider_changed_green(float(dgreen))
+    slider_changed_blue(float(dblue))
+    slider_changed_x(float(dx))
+    slider_changed_y(float(dy))
+    slider_changed_z(float(dz))
+    messagebox.showinfo('Notification', 'Default Preset Applied')
+
+
+defaultbtn = Button(tab3, text="Defaults", command=setDefaults)
+defaultbtn.grid(column=2, row=0)
+
+
+def openPreset():
+    open1 = filedialog.askopenfile()
+
+
+def savePreset():
+    save1 = filedialog.asksaveasfile()
+
+
+openpresetbtn = Button(tab3, text='Open', command=openPreset)
+openpresetbtn.grid(column=0, row=0)
+
+savepresetbtn = Button(tab3, text='Save As', command=savePreset)
+savepresetbtn.grid(column=1, row=0)
 
 root.mainloop()
