@@ -6,7 +6,7 @@
 
 <h4 align="center">A Sun Controller & Modifier for IW4x & IW4m</a>!</h4>
 <div align="center">
-  <a href="https://github.com/kruumy/iw4-sun-constoller">
+  <a href="https://github.com/kruumy/iw4-sun-controller/blob/main/preview.png">
     <img src="preview.png" alt="Preivew" width="300" height="300">
   </a>
 </div>
