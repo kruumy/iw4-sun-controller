@@ -23,7 +23,7 @@
 
 1. Download the latest version from **releases**. -->
 2. Join a mw2 game or load a demo
-3. Open iw4xsuncontroller.exe
+3. Open iw4suncontroller.exe
 4. Done!
 
 ## Todo
