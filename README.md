@@ -4,6 +4,11 @@
   <br>
 </h1>
 
+<div align="center">
+  <a href="https://github.com/kruumy/iw4-sun-controller/releases"><img src="https://img.shields.io/github/v/release/kruumy/iw4-sun-controller?label=Latest%20version&style=flat-square"></a>
+  <a href="https://paypal.me/JPauls281"><img src="https://img.shields.io/badge/Donate-Paypal-orange?style=flat-square"></a>
+</div>
+
 <h4 align="center">A Sun Controller & Modifier for IW4x & IW4m</a>!</h4>
 <div align="center">
   <a href="https://github.com/kruumy/iw4-sun-controller/blob/main/preview.png">
