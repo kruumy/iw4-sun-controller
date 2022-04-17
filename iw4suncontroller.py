@@ -76,8 +76,10 @@ def callback(url):
 
 lbl1 = Label(tab5, text="v2.00")
 lbl1.grid(column=0, row=0)
+lbl2 = Label(tab5, text="Made By Kruumy")
+lbl2.grid(column=0, row=1)
 link = Label(tab5, text="Github Page", fg="blue", cursor="hand2")
-link.grid(column=0, row=1)
+link.grid(column=0, row=2)
 link.bind("<Button-1>", lambda e: callback("https://github.com/kruumy/iw4-sun-controller"))
 
 
@@ -505,11 +507,29 @@ defaultbtn.grid(column=2, row=0)
 
 
 def openPreset():
-    open1 = filedialog.askopenfile()
+    open1 = filedialog.askopenfilename(filetypes=[("Sun file", ".sun")], defaultextension=".sun", title="Open Config")
+    try:
+        fob = open(open1, "r")
+        fobi = fob.readlines()
+        setPreset(fobi[0], fobi[1], fobi[2], fobi[3], fobi[4], fobi[5])
+        fob.close()
+    except:
+        print("no text file (OPEN)")
 
 
 def savePreset():
-    save1 = filedialog.asksaveasfile()
+    save1 = filedialog.asksaveasfilename(
+        filetypes=[("Sun file", ".sun")],
+        defaultextension=".sun", title="Save Config")
+    try:
+        valueList = str(get_current_value_red()) + "\n" + str(get_current_value_green()) + "\n" + str(
+            get_current_value_blue()) + "\n" + str(get_current_value_x()) + "\n" + str(
+            get_current_value_y()) + "\n" + str(get_current_value_z())
+        fobo = open(save1, 'w')
+        fobo.write(str(valueList))
+        fobo.close()
+    except:
+        print("no text file (CLOSE)")
 
 
 openpresetbtn = Button(tab3, text='Open', command=openPreset)
