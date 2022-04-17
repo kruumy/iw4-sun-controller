@@ -25,7 +25,7 @@
 
 <div align="left">
   <a href="https://github.com/kruumy/iw4-sun-controller/blob/main/preview2.png">
-    <img src="preview2.png" alt="Preivew" width="300" height="100">
+    <img src="preview3.png" alt="Preivew" width="300" height="100">
   </a>
 </div>
 
