@@ -38,11 +38,6 @@
 | IW4m | Yes |
 | Mw2 | ? |
 
-
-## Todo
-
-* Remake in c#
-
 ## Credit
 
 - [Gmzorz](https://youtu.be/GBZYLdMKc3s) for finding the addresses.
